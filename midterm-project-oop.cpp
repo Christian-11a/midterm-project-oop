@@ -104,8 +104,7 @@ private:
                 return true;
             }
         } return false;
-    }
-public:
+    } public:
     // Function to clear the screen
     void clearScreen() {
         system("cls");
@@ -235,8 +234,7 @@ public:
     } if (index == -1) {
         cout << "Item not found!" << endl;
         return;
-    }
-    int updateOption;
+    } int updateOption;
     while (true) {
         cout << "What do you want to update? (1 for Quantity, 2 for Price): ";
         string input;
@@ -253,8 +251,7 @@ public:
             clearScreen();
             continue;
         } break;
-    }
-    switch (updateOption) {
+    } switch (updateOption) {
         case 1: {
             int newQuantity;
             while (true) {
@@ -279,8 +276,7 @@ public:
             cout << "\nQuantity of Item " << items[index]->getName() << " updated from " 
                  << oldQuantity << " to " << newQuantity << endl;
             break;
-        }
-        case 2: {
+        } case 2: {
             double newPrice;
             while (true) {
                 cout << "Enter new price: ";
@@ -314,8 +310,7 @@ public:
         if (itemCount == 0) {
             cout << "No items to remove!" << endl;
             return;
-        }
-        string id;
+        } string id;
         cout << "Enter Item ID to remove: ";
         cin >> id;
         // Search for item by ID
@@ -350,20 +345,14 @@ public:
           // Convert category to uppercase for case-insensitive comparison
         for (char& ch : category) {
         ch = toupper(ch);
-        }
-        // Check if the user wants to go back
-        if (category == "0") {
+        } if (category == "0") {
         return;
-        }
-         // Check if the category is a single word
-         if (category.find(' ') != string::npos) {
+        } if (category.find(' ') != string::npos) {
         cout << "\nInvalid category! Only one category is allowed per item.";
         cout <<"\n";
         pause();
         continue;
-          }
-    // Validate category
-    if (!isValidCategory(category)) {
+          } if (!isValidCategory(category)) {
         cout << "\nCategory " << category << " does not exist!";
         cout <<"\n";
         pause();
@@ -420,8 +409,7 @@ public:
             } cout << left << setw(10) << items[i]->getID() << setw(20) << items[i]->getName() << setw(10) << items[i]->getQuantity() << setw(10) << items[i]->getPrice() << setw(15) << items[i]->getCategory() << endl;
             found = true;
         }
-    }
-    if (!found) {
+    } if (!found) {
         cout << "Item not found!" << endl;
     }
 }
@@ -486,7 +474,11 @@ void SortItems() override {
                     }
                 }
             } cout << "\nAll items sorted by quantity!" << endl;
-            break;
+            cout << left << setw(10) << "ID" << setw(20) << "Name" << setw(10) << "Quantity" << setw(10) << "Price" << setw(15) << "Category" << endl;
+            cout << "---------------------------------------------------------------------" << endl;
+            for (int i = 0; i < itemCount; i++) {
+            cout << left << setw(10) << items[i]->getID() << setw(20) << items[i]->getName() << setw(10) << items[i]->getQuantity() << setw(10) << items[i]->getPrice() << setw(15) << items[i]->getCategory() << endl;
+        } break;
             case 2:
             if (sortOrder == 1) {
                 // Simple bubble sort by price in ascending order
@@ -507,31 +499,40 @@ void SortItems() override {
                     }
                 }
             } cout << "\nAll items sorted by price!" << endl;
-            break;
+            cout << left << setw(10) << "ID" << setw(20) << "Name" << setw(10) << "Quantity" << setw(10) << "Price" << setw(15) << "Category" << endl;
+            cout << "---------------------------------------------------------------------" << endl;
+            for (int i = 0; i < itemCount; i++) {
+            cout << left << setw(10) << items[i]->getID() << setw(20) << items[i]->getName() << setw(10) << items[i]->getQuantity() << setw(10) << items[i]->getPrice() << setw(15) << items[i]->getCategory() << endl;
+        } break;
         default:
             cout << "\nInvalid choice! Please enter a valid choice (1 or 2)." << endl;
             break;
     }
 }
-    // Display low stock items
-    void DisplayLowStockItems() override {
-        if (itemCount == 0) {
-            cout << "No items to display!" << endl;
-            return;
+// Display low stock items
+ void DisplayLowStockItems() override {
+    if (itemCount == 0) {
+        cout << "No items to display!" << endl;
+        return;
+    } bool found = false;
+      for (int i = 0; i < itemCount; i++) {
+        if (items[i]->getQuantity() < 5) {
+            found = true;
+            break; // exit the loop as soon as we find a low stock item
         }
+    } if (found) {
         cout << "Low stock items (less than 5):" << endl;
         cout << left << setw(10) << "ID" << setw(20) << "Name" << setw(10) << "Quantity" << setw(10) << "Price" << setw(15) << "Category" << endl;
         cout << "---------------------------------------------------------------------" << endl;
-        bool found = false;
         for (int i = 0; i < itemCount; i++) {
             if (items[i]->getQuantity() < 5) {
                 cout << left << setw(10) << items[i]->getID() << setw(20 ) << items[i]->getName() << setw(10) << items[i]->getQuantity() << setw(10) << items[i]->getPrice() << setw(15) << items[i]->getCategory() << endl;
-                found = true;
             }
-        } if (!found) {
-            cout << "No low stock items found!" << endl;
         }
+    } else {
+        cout << "No low stock items found!" << endl;
     }
+}
    // Show menu
     void ShowMenu() override {
     bool isValid = true;
