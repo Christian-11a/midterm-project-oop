@@ -92,7 +92,7 @@ private:
                 if (c == '.' && !decimalPoint) {
                     decimalPoint = true;
                 } else {
-                    return false;
+                  return false;
                 }
             }
         } return true;
@@ -268,13 +268,17 @@ private:
                 if (newQuantity <= 0) {
                     cout << "\nQuantity should be a positive number!\n";
                     continue;
-                } break; // Valid quantity entered
+                } 
+                // Check if new quantity is the same as old quantity
+                if (newQuantity == items[index]->getQuantity()) {
+                    cout << "\nInvalid input! The quantity you entered is already the current quantity.\n";
+                    continue;
+                } break; 
             }
             // Update and show success message
             int oldQuantity = items[index]->getQuantity();
             items[index]->setQuantity(newQuantity);
-            cout << "\nQuantity of Item " << items[index]->getName() << " updated from " 
-                 << oldQuantity << " to " << newQuantity << endl;
+            cout << "\nQuantity of Item " << items[index]->getName() << " updated from " << oldQuantity << " to " << newQuantity << endl;
             break;
         } case 2: {
             double newPrice;
@@ -292,14 +296,16 @@ private:
                 if (newPrice <= 0) {
                     cout << "\nPrice should be a positive number!\n";
                     continue;
-                } break; // Valid price entered
-            }
-            // Update and show success message
-            double oldPrice = items[index]->getPrice();
-            items[index]->setPrice(newPrice);
-            cout << "\nPrice of Item " << items[index]->getName() << " updated from " 
-                 << oldPrice << " to " << newPrice << endl;
-            break;
+                } 
+                // Check if new price is the same as old price
+                if (newPrice == items[index]->getPrice()) {
+                    cout << "\nInvalid input! The price you entered is already the current price.\n";
+                    continue;
+                } break; 
+            } double oldPrice = items[index]->getPrice();
+              items[index]->setPrice(newPrice);
+              cout << "\nPrice of Item " << items[index]->getName() << " updated from " << oldPrice << " to " << newPrice << endl;
+              break;
         } default:
             cout << "\nInvalid choice!" << endl;
             break;
@@ -313,7 +319,6 @@ private:
         } string id;
         cout << "Enter Item ID to remove: ";
         cin >> id;
-        // Search for item by ID
         int index = -1;
         for (int i = 0; i < itemCount; i++) {
             if (items[i]->getID() == id) {
@@ -342,7 +347,6 @@ private:
          clearScreen();
         cout << "Enter Category (Clothing, Electronics, Entertainment) or press 0 to go back: ";
         getline(cin, category);
-          // Convert category to uppercase for case-insensitive comparison
         for (char& ch : category) {
         ch = toupper(ch);
         } if (category == "0") {
@@ -352,7 +356,7 @@ private:
         cout <<"\n";
         pause();
         continue;
-          } if (!isValidCategory(category)) {
+        } if (!isValidCategory(category)) {
         cout << "\nCategory " << category << " does not exist!";
         cout <<"\n";
         pause();
@@ -393,10 +397,8 @@ private:
     cin >> id;
     for (char& ch : id) {
         ch = toupper(ch);
-    }
-    // Search for item by ID
-    bool found = false;
-    for (int i = 0; i < itemCount; i++) {
+    } bool found = false;
+      for (int i = 0; i < itemCount; i++) {
         string itemId = items[i]->getID();
         for (char& ch : itemId) {
             ch = toupper(ch);
@@ -516,16 +518,16 @@ void SortItems() override {
         return;
     } bool found = false;
       for (int i = 0; i < itemCount; i++) {
-        if (items[i]->getQuantity() < 5) {
+        if (items[i]->getQuantity() < 6) {
             found = true;
             break; // exit the loop as soon as we find a low stock item
         }
     } if (found) {
-        cout << "Low stock items (less than 5):" << endl;
+        cout << "Low stock items (quantity of 5 and below):" << endl;
         cout << left << setw(10) << "ID" << setw(20) << "Name" << setw(10) << "Quantity" << setw(10) << "Price" << setw(15) << "Category" << endl;
         cout << "---------------------------------------------------------------------" << endl;
         for (int i = 0; i < itemCount; i++) {
-            if (items[i]->getQuantity() < 5) {
+            if (items[i]->getQuantity() < 6) {
                 cout << left << setw(10) << items[i]->getID() << setw(20 ) << items[i]->getName() << setw(10) << items[i]->getQuantity() << setw(10) << items[i]->getPrice() << setw(15) << items[i]->getCategory() << endl;
             }
         }
@@ -573,7 +575,7 @@ void SortItems() override {
                              __/ |                   __/ |                                                                              
                             |___/                   |___/                                                                               
 )" << endl;
-                        break;
+              break;
                 }
             } else {
                 cout << "\nInvalid choice! Please choose a number between 1 and 9." << endl;
