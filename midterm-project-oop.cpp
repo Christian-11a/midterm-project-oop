@@ -172,7 +172,7 @@ void AddItem() override {
             try {
             quantity = stoi(input);
             if (quantity <= 0) {
-                cout << "\nQuantity should be a positive number!\n";
+                cout << "\nQuantity should be a positive number or more than 0!\n";
             } else {
                 validQuantity = true; // Valid quantity entered
             }
@@ -193,7 +193,7 @@ void AddItem() override {
         } else {
             price = stod(input);
             if (price <= 0) {
-                cout << "\nPrice should be a positive number!\n";
+                cout << "\nPrice should be a positive number or more than 0!\n";
             } else {
                 validPrice = true; // Valid price entered
             }
@@ -253,7 +253,7 @@ void UpdateItem() override {
                     cin.ignore(10000, '\n');
                     cout << "\nQuantity should contain only digits and no spaces!\n";
               } else if (newQuantity <= 0) {
-                   cout << "\nQuantity should be a positive number!\n";
+                   cout << "\nQuantity should be a positive number or more than 0!\n";
              } else if (newQuantity == items[index]->getQuantity()) {
                  cout << "\nInvalid input! The quantity you entered is already the current quantity.\n";
             } else {
@@ -277,7 +277,7 @@ void UpdateItem() override {
                 cin.ignore(10000, '\n');
                 cout << "\nPrice should contain only digits, decimal point, and no spaces!\n";
         } else if (newPrice <= 0) {
-                cout << "\nPrice should be a positive number!\n";
+                cout << "\nPrice should be a positive number or more than 0!\n";
         } else if (newPrice == items[index]->getPrice()) {
                 cout << "\nInvalid input! The price you entered is already the current price.\n";
         } else {
