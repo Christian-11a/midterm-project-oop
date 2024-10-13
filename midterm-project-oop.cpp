@@ -390,7 +390,7 @@ void UpdateItem() override {
             } if (itemId == id) {
                 // Display item details if found
                 if (!found) {
-                    cout << "Displaying Items that have ID '" << id << "':\n";
+                    cout << "Displaying Items that have same or similar ID to '" << id << "':\n";
                     cout << left << setw(10) << "ID" << setw(20) << "Name" << setw(10) << "Quantity" << setw(10) << "Price" << setw(15) << "Category" << endl;
                     cout << "---------------------------------------------------------------------" << endl;
                 } cout << left << setw(10) << items[i]->getID() << setw(20) << items[i]->getName() << setw(10) << items[i]->getQuantity() << setw(10) << items[i]->getPrice() << setw(15) << items[i]->getCategory() << endl;
